@@ -179,7 +179,7 @@ body{
   pointer-events: none;
   transition: all 0.2s ease;
 }
-.users .search input.show{
+.users .search input.active{
   opacity: 1;
   pointer-events: auto;
 }

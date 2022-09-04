@@ -7,7 +7,7 @@
     
     $output="";
 
-    $sql=mysqli_query($conn,"SELECT * FROM messages LEFT JOIN users ON users.unique_id = messages.incoming_msg_id WHERE (outgoing_msg_id={$outgoing_id} AND incoming_msg_id={$incoming_id}) OR (outgoing_msg_id={$incoming_id} AND incoming_msg_id={$outgoing_id}) ORDER BY msg_id DESC");
+    $sql=mysqli_query($conn,"SELECT * FROM messages LEFT JOIN users ON users.unique_id = messages.incoming_msg_id WHERE (outgoing_msg_id={$outgoing_id} AND incoming_msg_id={$incoming_id}) OR (outgoing_msg_id={$incoming_id} AND incoming_msg_id={$outgoing_id}) ORDER BY msg_id");
 
     if(mysqli_num_rows($sql)>0){
       while($row=mysqli_fetch_assoc($sql)){

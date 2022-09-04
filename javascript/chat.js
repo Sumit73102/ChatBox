@@ -7,6 +7,14 @@ form.onsubmit=(e)=>{
 	e.preventDefault(); //preventing form from submitting
 }
 
+inputField.focus();
+inputField.onkeyup = ()=>{
+    if(inputField.value != ""){
+        sendBtn.classList.add("active");
+    }else{
+        sendBtn.classList.remove("active");
+    }
+}
 
 sendBtn.onclick=()=>{
 	console.log("Success");
@@ -15,13 +23,22 @@ sendBtn.onclick=()=>{
 	xhr.onload=()=>{
 		if(xhr.readyState === XMLHttpRequest.DONE){
 			if(xhr.status===200){
-				inputField.value=""; //After inserting into db
+				inputField.value="";
+				scrollToBottom(); //After inserting into db
 			}
 		}
 	}
 	//we have to send the form data from ajax to php
 	let formData=new FormData(form);
 	xhr.send(formData);
+}
+
+chatBox.onmouseenter = ()=>{
+    chatBox.classList.add("active");
+}
+
+chatBox.onmouseleave = ()=>{
+    chatBox.classList.remove("active");
 }
 
 setInterval(()=>{
@@ -32,9 +49,16 @@ setInterval(()=>{
 			if(xhr.status===200){
 				let data=xhr.response;
 				chatBox.innerHTML=data;
+				if(!chatBox.classList.contains("active")){
+                 	scrollToBottom();
+                }
 			}
 		}
 	}
 	let formData=new FormData(form);
 	xhr.send(formData);
 },500);//fun will run frequently after 500ms
+
+function scrollToBottom(){
+    chatBox.scrollTop = chatBox.scrollHeight;
+ }
